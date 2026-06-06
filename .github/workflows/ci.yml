@@ -1,0 +1,23 @@
+name: CI Build (Scrubbe Test)
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          echo "Running test suite..."
+          echo "Simulating a critical deployment failure for Scrubbe incident detection test"
+          exit 1
+
+      - name: Deploy
+        if: success()
+        run: echo "Deploy would run here if tests passed"
